@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Version>8.0.2</Version>
+		<Title>OdooRpc.CoreCLR.Client.V8</Title>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageReadmeFile>README_NUGET.md</PackageReadmeFile>
+		<Description>Simple Odoo JSON-RPC Client for .NET 8. Fork from https://github.com/vmlf01/OdooRpc.CoreCLR.Client . No extra library dependencies. Newtonsoft.Json library dependency has been removed.</Description>
+		<Copyright>Copyright © 2024 akifmt</Copyright>
+		<PackageProjectUrl>https://github.com/akifmt/OdooRpc.CoreCLR.Client.V8</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/akifmt/OdooRpc.CoreCLR.Client.V8</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>odoo;openerp;dotnet;code;json-rpc;dotnet8;.net8</PackageTags>
+		<PackageReleaseNotes>Simple Odoo JSON-RPC Client for .NET 8. Fork from https://github.com/vmlf01/OdooRpc.CoreCLR.Client . No extra library dependencies. Newtonsoft.Json library dependency has been removed.</PackageReleaseNotes>
+		<AssemblyVersion>8.0.2.0</AssemblyVersion>
+		<FileVersion>8.0.2.0</FileVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<Optimize>False</Optimize>
+		<DebugType>portable</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<Optimize>True</Optimize>
+		<DebugType>none</DebugType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\..\README_NUGET.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="JsonRpc.CoreCLR.Client.V8" Version="8.0.2" />
+	</ItemGroup>
+
+</Project>
