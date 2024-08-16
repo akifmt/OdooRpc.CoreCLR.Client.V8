@@ -13,6 +13,7 @@
 
 OdooRpc.CoreCLR.Client.V8
 * Simple Odoo JSON-RPC Client for .NET 8
+* Compatible with Odoo Version 17 (Released November, 2023)
 
 
 ## Installation
@@ -21,6 +22,61 @@ OdooRpc.CoreCLR.Client.V8
   - Check provided options from NuGet:
   - [https://www.nuget.org/packages/OdooRpc.CoreCLR.Client.V8](https://www.nuget.org/packages/OdooRpc.CoreCLR.Client.V8) 
 
+
+## Usage
+We will create a custom model that extends the existing ProductProduct class, allowing us to interact with Odoo's product data more effectively. We will also include the necessary NuGet packages, a detailed explanation of the code, and how to make requests using the custom model.  
+Steps:  
+1. Adding Required Libraries
+2. Creating a Child Class
+3. Making Requests with the Custom Model
+
+#### 1. Adding Required Libraries
+You need to add the following packages to your .csproj file:
+```
+<ItemGroup>
+    <PackageReference Include="OdooRpc.CoreCLR.Client.V8" Version="8.0.4" />
+    <PackageReference Include="OdooRpc.CoreCLR.Client.V8.Models" Version="8.0.4" />
+</ItemGroup>
+```
+
+#### 2. Creating a Child Class
+The custom class ProductProductCustom extends the ProductProduct class. Here’s a breakdown of its components:
+```
+using OdooRpc.CoreCLR.Client.V8.Models;
+using OdooRpc.CoreCLR.Client.V8.Models.Items;
+using System.Text.Json.Serialization;
+
+namespace ConsoleApp1Test.Specs.Models;
+
+public class ProductProductCustom : ProductProduct
+{
+
+    [JsonIgnore]
+    public Many2OneItem create_u => new Many2OneItem(this.create_uid);
+
+    [JsonIgnore]
+    public Many2OneItem write_u => new Many2OneItem(this.write_uid);
+
+    [JsonIgnore]
+    public Many2OneItem categ => new Many2OneItem(this.categ_id);
+
+}
+```
+
+#### 3. Making Requests with the Custom Model
+The following code, demonstrates how to make an asynchronous request to fetch products using the custom model:
+```
+// Fetch products using the custom model
+public async Task<ProductProductCustom[]> FetchProductsAsync()
+{
+    OdooConnectionInfo odooConnectionInfo = new OdooConnectionInfo { Database = "YOUR_DB_NAME", Host = "YOUR_HOST", Port = 443, IsSSL = true, Username = "YOUR_USERNAME", Password = "YOUR_PASSWORD" };
+    OdooRpcClient client = new OdooRpcClient(odooConnectionInfo);
+
+    ProductProductCustom[] products = await client.Get<ProductProductCustom[]>(
+              new OdooSearchParameters(ModelNames.ProductProduct, new OdooDomainFilter()));
+    return products;
+}
+```
 
 
 ## Release Notes
